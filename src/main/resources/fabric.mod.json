@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "areas",
+  "version": "1.0",
+  "name": "Areas",
+  "description": "",
+  "authors": [
+    "olliejohnson"
+  ],
+  "contact": {
+    "website": "https://mods.oliverj.io/areas",
+    "repo": "https://github.com/oliver/Areas"
+  },
+  "license": "All-Rights-Reserved",
+  "icon": "assets/areas/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "io.oliverj.areas.client.AreasClient"
+    ],
+    "main": [
+      "io.oliverj.areas.Areas"
+    ]
+  },
+  "mixins": [
+    "areas.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.15.11",
+    "fabric": "*",
+    "minecraft": "1.20.1",
+    "trinkets": ">=3.7.2",
+    "modmenu": ">=7.2.2"
+  },
+  "custom": {
+    "modmenu": {
+      "update_checker": false
+    }
+  }
+}
