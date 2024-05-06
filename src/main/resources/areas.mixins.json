@@ -4,12 +4,12 @@
   "package": "io.oliverj.areas.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "PlayerDeathMixin"
   ],
   "client": [
     "TitleScreenMixin"
   ],
   "server": [
+    "ServerPlayerEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1
