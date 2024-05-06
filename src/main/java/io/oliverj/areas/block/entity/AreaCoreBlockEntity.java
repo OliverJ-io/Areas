@@ -12,6 +12,7 @@ import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 public class AreaCoreBlockEntity extends BlockEntity implements ImplementedInventory {
@@ -47,5 +48,19 @@ public class AreaCoreBlockEntity extends BlockEntity implements ImplementedInven
     @Override
     public NbtCompound toInitialChunkDataNbt() {
         return createNbt();
+    }
+
+    @Override
+    public void markDirty() {
+        world.updateListeners(pos, getCachedState(), getCachedState(), 3);
+        super.markDirty();
+    }
+
+    public ItemStack getRenderStack() {
+        return this.items.get(0);
+    }
+
+    public static void tick(World world, BlockPos pos, BlockState state, AreaCoreBlockEntity be) {
+        world.updateListeners(pos, be.getCachedState(), be.getCachedState(), 3);
     }
 }

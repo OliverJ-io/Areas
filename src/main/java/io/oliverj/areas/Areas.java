@@ -28,6 +28,10 @@ public class Areas implements ModInitializer {
         LOGGER.info("Finished Registration - NORMAL");
     }
 
+    public void networking_registration() {
+        PacketRegister.registerClientDeferredServerSide();
+    }
+
     public void special_registration() {
         FieldRegistrationHandler.register(ArtifactRegister.class, MOD_ID, false);
         LOGGER.info("Finished Registration - SPECIAL");
