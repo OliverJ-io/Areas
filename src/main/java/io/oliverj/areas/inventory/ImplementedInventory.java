@@ -5,6 +5,7 @@ import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.collection.DefaultedList;
+import org.spongepowered.asm.mixin.Interface;
 
 @SuppressWarnings("unused")
 public interface ImplementedInventory extends Inventory {
@@ -67,9 +68,7 @@ public interface ImplementedInventory extends Inventory {
     }
 
     @Override
-    default void markDirty() {
-        //Override for behavior
-    }
+    default void markDirty() {}
 
     @Override
     default boolean canPlayerUse(PlayerEntity player) {

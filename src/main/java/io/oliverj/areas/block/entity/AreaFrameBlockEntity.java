@@ -11,6 +11,4 @@ public class AreaFrameBlockEntity extends BlockEntity {
     public AreaFrameBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegister.AREA_FRAME_BLOCK_ENTITY, pos, state);
     }
-
-    public static void tick(World world, BlockPos pos, BlockState state, AreaFrameBlockEntity be) {}
 }

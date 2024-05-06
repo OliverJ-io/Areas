@@ -1,8 +1,11 @@
 package io.oliverj.areas.block;
 
 import io.oliverj.areas.block.entity.AreaCoreBlockEntity;
+import io.oliverj.areas.registry.BlockEntityRegister;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityTicker;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
@@ -20,12 +23,10 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
 
-@SuppressWarnings("Deprecation")
 public class AreaCoreBlock extends HorizontalConnectingBlock implements BlockEntityProvider {
-
-    private final VoxelShape SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 12.0, 16.0);
+    private final VoxelShape SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 10.9, 16.0);
     public AreaCoreBlock(Settings settings) {
-        super(8.0f, 8.0f, 16.0f, 16.0f, 16.0f, settings);
+        super(8.0f, 8.0f, 16.0f, 16.0f, 10.9f, settings);
         this.setDefaultState(this.stateManager.getDefaultState().with(NORTH, false).with(EAST, false).with(SOUTH, false).with(WEST, false).with(WATERLOGGED, false));
     }
 
@@ -99,5 +100,19 @@ public class AreaCoreBlock extends HorizontalConnectingBlock implements BlockEnt
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(new Property[]{NORTH, EAST, WEST, SOUTH, WATERLOGGED});
+    }
+
+    /**
+     * {@return the ticker if the given type and expected type are the same, or {@code null} if they are different}
+     */
+    @Nullable
+    protected static <E extends BlockEntity, A extends BlockEntity> BlockEntityTicker<A> checkType(BlockEntityType<A> givenType, BlockEntityType<E> expectedType, BlockEntityTicker<? super E> ticker) {
+        return expectedType == givenType ? (BlockEntityTicker<A>) ticker : null;
+    }
+
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
+        return checkType(type, BlockEntityRegister.AREA_CORE_BLOCK_ENTITY, (world1, pos, state1, be) -> AreaCoreBlockEntity.tick(world1, pos, state1, be));
     }
 }

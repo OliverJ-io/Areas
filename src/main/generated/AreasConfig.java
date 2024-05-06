@@ -13,7 +13,7 @@ public class AreasConfig extends ConfigWrapper<io.oliverj.areas.config.AreasConf
 
     public final Keys keys = new Keys();
 
-    private final Option<java.lang.Boolean> enableArtifacts = this.optionForKey(this.keys.enableArtifacts);
+
 
     private AreasConfig() {
         super(io.oliverj.areas.config.AreasConfigModel.class);
@@ -35,17 +35,10 @@ public class AreasConfig extends ConfigWrapper<io.oliverj.areas.config.AreasConf
         return wrapper;
     }
 
-    public boolean enableArtifacts() {
-        return enableArtifacts.value();
-    }
-
-    public void enableArtifacts(boolean value) {
-        enableArtifacts.set(value);
-    }
 
 
     public static class Keys {
-        public final Option.Key enableArtifacts = new Option.Key("enableArtifacts");
+
     }
 }
 
