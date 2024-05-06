@@ -6,6 +6,10 @@
   "mixins": [
   ],
   "client": [
+    "TitleScreenMixin"
+  ],
+  "server": [
+    "PlayerDeathMixin"
   ],
   "injectors": {
     "defaultRequire": 1

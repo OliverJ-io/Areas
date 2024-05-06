@@ -12,4 +12,5 @@ public class ItemRegister implements ItemRegistryContainer {
     public static final Item INVERSION_CRYSTAL = new InversionCrystalItem(new FabricItemSettings().maxCount(1));
     public static final Item ARTIFACT_BASE = new ArtifactBaseItem(new FabricItemSettings());
     public static final Item TEST_ITEM = new GUITestItem(new FabricItemSettings());
+    public static final Item HURT_ITEM = new DamageTestItem(new FabricItemSettings());
 }

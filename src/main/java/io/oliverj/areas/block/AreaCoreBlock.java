@@ -68,10 +68,10 @@ public class AreaCoreBlock extends HorizontalConnectingBlock implements BlockEnt
         return false;
     }
 
-    public boolean canConnect(BlockState state, boolean neighborIsFullSquare, Direction dir) {
+    public boolean canConnect(BlockState state) {
         Block block = state.getBlock();
         boolean bl2 = block instanceof AreaFrameBlock;
-        return !cannotConnect(state) && neighborIsFullSquare || bl2;
+        return !cannotConnect(state) && bl2;
     }
 
     @Nullable
@@ -87,12 +87,12 @@ public class AreaCoreBlock extends HorizontalConnectingBlock implements BlockEnt
         BlockState bs2 = blockView.getBlockState(bp3);
         BlockState bs3 = blockView.getBlockState(bp4);
         BlockState bs4 = blockView.getBlockState(bp5);
-        return super.getPlacementState(ctx).with(NORTH, this.canConnect(bs1, bs1.isSideSolidFullSquare(blockView, bp2, Direction.SOUTH), Direction.SOUTH)).with(EAST, this.canConnect(bs2, bs2.isSideSolidFullSquare(blockView, bp3, Direction.WEST), Direction.WEST)).with(SOUTH, this.canConnect(bs3, bs3.isSideSolidFullSquare(blockView, bp4, Direction.NORTH), Direction.NORTH)).with(WEST, this.canConnect(bs4, bs4.isSideSolidFullSquare(blockView, bp5, Direction.EAST), Direction.EAST));
+        return super.getPlacementState(ctx).with(NORTH, this.canConnect(bs1)).with(EAST, this.canConnect(bs2)).with(SOUTH, this.canConnect(bs3)).with(WEST, this.canConnect(bs4));
     }
 
     @Override
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
-        return direction.getAxis().getType() == Direction.Type.HORIZONTAL ? state.with(FACING_PROPERTIES.get(direction), this.canConnect(neighborState, neighborState.isSideSolidFullSquare(world, neighborPos, direction.getOpposite()), direction.getOpposite())) : super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
+        return direction.getAxis().getType() == Direction.Type.HORIZONTAL ? state.with(FACING_PROPERTIES.get(direction), this.canConnect(neighborState)) : super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
 
     @Override

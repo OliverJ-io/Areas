@@ -20,6 +20,9 @@
     ],
     "main": [
       "io.oliverj.areas.Areas"
+    ],
+    "cardinal-components": [
+      "io.oliverj.areas.registry.CardinalComponentRegister"
     ]
   },
   "mixins": [
@@ -35,6 +38,9 @@
   "custom": {
     "modmenu": {
       "update_checker": false
-    }
+    },
+    "cardinal-components": [
+      "areas:resurrection"
+    ]
   }
 }
