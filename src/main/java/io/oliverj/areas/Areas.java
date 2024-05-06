@@ -7,8 +7,6 @@ import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.lang.reflect.Field;
-
 public class Areas implements ModInitializer {
 
     public static final String MOD_ID = "areas";

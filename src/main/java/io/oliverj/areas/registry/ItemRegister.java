@@ -5,6 +5,7 @@ import io.wispforest.owo.registration.reflect.ItemRegistryContainer;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.item.Item;
 
+@SuppressWarnings("unused")
 public class ItemRegister implements ItemRegistryContainer {
 
     public static final Item CRYSTALLINE_STRUCTURE = new CrystallineStructureItem(new FabricItemSettings());

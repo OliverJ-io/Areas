@@ -19,8 +19,7 @@ public class PlayerDeathMixin {
     private void onDeath(DamageSource damageSource, CallbackInfo ci) {
         ci.cancel();
         Areas.LOGGER.info("Ran Death Mixin");
-        if (damageSource.getSource() instanceof PlayerEntity) {
-            PlayerEntity player = (PlayerEntity) damageSource.getSource();
+        if (damageSource.getSource() instanceof PlayerEntity player) {
             player.sendMessage(Text.literal("Hello World!"));
             if (player.getComponent(CardinalComponentRegister.RESURRECTION).getUses() > 0 && player.getComponent(TrinketsApi.TRINKET_COMPONENT).isEquipped(ArtifactRegister.RESURRECT_ARTIFACT)) {
                 player.heal(player.getMaxHealth());

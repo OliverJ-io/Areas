@@ -1,7 +1,6 @@
 package io.oliverj.areas.item;
 
 import com.google.common.collect.Multimap;
-import dev.emi.trinkets.api.SlotAttributes;
 import dev.emi.trinkets.api.SlotReference;
 import dev.emi.trinkets.api.TrinketItem;
 import io.oliverj.areas.registry.CardinalComponentRegister;
@@ -11,7 +10,6 @@ import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
 import net.minecraft.text.Text;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
@@ -26,8 +24,7 @@ public class ArtifactOfResurrectionItem extends TrinketItem {
 
     @Override
     public Multimap<EntityAttribute, EntityAttributeModifier> getModifiers(ItemStack stack, SlotReference slot, LivingEntity entity, UUID uuid) {
-        var modifiers = super.getModifiers(stack, slot, entity, uuid);
-        return modifiers;
+        return super.getModifiers(stack, slot, entity, uuid);
     }
 
     @Override

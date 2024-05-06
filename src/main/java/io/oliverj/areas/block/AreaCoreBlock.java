@@ -20,6 +20,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
 
+@SuppressWarnings("Deprecation")
 public class AreaCoreBlock extends HorizontalConnectingBlock implements BlockEntityProvider {
 
     private final VoxelShape SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 12.0, 16.0);

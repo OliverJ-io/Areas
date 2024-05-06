@@ -2,7 +2,6 @@ package io.oliverj.areas.block;
 
 import io.oliverj.areas.block.entity.AreaFrameBlockEntity;
 import io.oliverj.areas.registry.BlockEntityRegister;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.entity.BlockEntity;

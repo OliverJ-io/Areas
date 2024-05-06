@@ -4,7 +4,6 @@ import io.oliverj.areas.inventory.ImplementedInventory;
 import io.oliverj.areas.registry.BlockEntityRegister;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;

@@ -1,7 +1,5 @@
 package io.oliverj.areas.components;
 
-import dev.onyxstudios.cca.api.v3.item.ItemComponent;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 
 public class ResurrectionComponent implements ResurrectionUsesComponent {

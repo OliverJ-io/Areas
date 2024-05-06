@@ -6,6 +6,7 @@ import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 
+@SuppressWarnings("unused")
 public class StatusEffectRegister implements AutoRegistryContainer<StatusEffect> {
 
     public static final StatusEffect DEBT = new DebtStatusEffect();

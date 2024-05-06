@@ -16,7 +16,7 @@ public class DamageTestItem extends Item {
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-        user.damage(AreasDamageTypes.of(world, AreasDamageTypes.INVERSION_DAMGAGE_TYPE), 1.0f);
+        user.damage(AreasDamageTypes.of(world, AreasDamageTypes.INVERSION_DAMAGE_TYPE), 1.0f);
         Areas.LOGGER.info("Used Test Item - DAMAGE");
         return TypedActionResult.success(user.getStackInHand(hand));
     }

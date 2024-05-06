@@ -4,8 +4,8 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.text.Text;
 
+@SuppressWarnings("empty")
 public class DebtStatusEffect extends StatusEffect {
     public DebtStatusEffect() {
         super(StatusEffectCategory.HARMFUL, 0x98D982);
@@ -19,7 +19,7 @@ public class DebtStatusEffect extends StatusEffect {
     @Override
     public void applyUpdateEffect(LivingEntity entity, int amplifier) {
         if (entity instanceof PlayerEntity) {
-            // NOP
+            // TODO: Complete Effect Processing
         }
     }
 }
