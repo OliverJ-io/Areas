@@ -1,12 +1,8 @@
 package io.oliverj.areas.mixin;
 
-import io.oliverj.areas.gui.TestScreen;
-import io.oliverj.areas.networking.Channels;
-import io.oliverj.areas.networking.packets.OpenScreenPacket;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.TitleScreen;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.HoverEvent;
 import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Mixin;

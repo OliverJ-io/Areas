@@ -29,7 +29,7 @@ public class AreasCommandRegistry {
                     .executes(new ModInfoCommand())
                     .build();
 
-            areasCommandsRootNode = CommandManager.literal("areacommands")
+            areasCommandsRootNode = CommandManager.literal("areas")
                     .executes(enInfoNode.getCommand())
                     .build();
 
@@ -45,5 +45,7 @@ public class AreasCommandRegistry {
                         .then(RequiredArgumentBuilder.argument("name", TextArgumentType.text()))
                                 .executes(new TestStatusCommand())
                 .build());
+
+        rootNode.addChild(areasCommandsRootNode);
     }
 }

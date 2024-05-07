@@ -1,18 +1,31 @@
 package io.oliverj.areas.block;
 
 import io.oliverj.areas.block.entity.AreaFrameBlockEntity;
+import io.oliverj.areas.networking.Channels;
+import io.oliverj.areas.networking.packets.ShowParticlesPacket;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.ai.pathing.NavigationType;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.Property;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
+import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
+
+import java.nio.channels.Channel;
 
 public class AreaFrameBlock extends HorizontalConnectingBlock implements BlockEntityProvider {
 
@@ -21,6 +34,13 @@ public class AreaFrameBlock extends HorizontalConnectingBlock implements BlockEn
     public AreaFrameBlock(Settings settings) {
         super(8.0f, 8.0f, 16.0f, 16.0f, 16.0f, settings);
         this.setDefaultState(this.stateManager.getDefaultState().with(NORTH, false).with(EAST, false).with(SOUTH, false).with(WEST, false).with(WATERLOGGED, false));
+    }
+
+    @Override
+    @Environment(EnvType.SERVER)
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+        Channels.RENDER_CHANNEL.serverHandle(MinecraftClient.getInstance().getServer().getPlayerManager().getPlayer(player.getUuid())).send(new ShowParticlesPacket());
+        return ActionResult.SUCCESS;
     }
 
     @Nullable

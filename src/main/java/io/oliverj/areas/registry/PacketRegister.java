@@ -1,22 +1,20 @@
 package io.oliverj.areas.registry;
 
-import io.oliverj.areas.gui.TestScreen;
 import io.oliverj.areas.networking.Channels;
-import io.oliverj.areas.networking.packets.OpenScreenPacket;
+import io.oliverj.areas.networking.packets.TestPacket;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.screen.CreditsScreen;
+import net.minecraft.text.Text;
 
 public class PacketRegister {
     public static void registerClientDeferredServerSide() {
-        Channels.OPEN_SCREEN.registerClientboundDeferred(OpenScreenPacket.class);
+        Channels.TEST_CHANNEL.registerClientboundDeferred(TestPacket.class);
     }
 
     @Environment(EnvType.CLIENT)
     public static void registerClientDeferredClientSide() {
-        Channels.OPEN_SCREEN.registerClientbound(OpenScreenPacket.class, ((message, access) -> {
-            MinecraftClient.getInstance().setScreen(new TestScreen());
+        Channels.TEST_CHANNEL.registerClientbound(TestPacket.class, ((message, access) -> {
+            access.player().sendMessage(Text.literal("Received Test: " + message));
         }));
     }
 }
