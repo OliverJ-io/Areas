@@ -8,7 +8,7 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
 
-public class CoreErrorParticle {
+public class Particles {
     public static final ParticleSystemController PARTICLE_CONTROLLER = new ParticleSystemController(new Identifier(Areas.MOD_ID, "particles"));
     public static final ParticleSystem<Void> CUBE = PARTICLE_CONTROLLER.registerDeferred(Void.class);
     public static final ParticleSystem<Void> BREAK_BLOCK_PARTICLES = PARTICLE_CONTROLLER.register(Void.class, (world, pos, data) -> {

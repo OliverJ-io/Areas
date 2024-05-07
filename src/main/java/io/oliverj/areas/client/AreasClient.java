@@ -2,7 +2,7 @@ package io.oliverj.areas.client;
 
 import io.oliverj.areas.client.rendering.AreaCoreBlockEntityRenderer;
 import io.oliverj.areas.networking.packets.ShowParticlesPacket;
-import io.oliverj.areas.particles.CoreErrorParticle;
+import io.oliverj.areas.particles.Particles;
 import io.oliverj.areas.registry.BlockEntityRegister;
 import io.oliverj.areas.registry.BlockRegister;
 import io.oliverj.areas.registry.PacketRegister;
@@ -36,12 +36,12 @@ public class AreasClient implements ClientModInitializer {
     }
 
     public void particle_magic() {
-        CoreErrorParticle.CUBE.setHandler(((world, pos, data) -> {
+        Particles.CUBE.setHandler(((world, pos, data) -> {
             ClientParticles.setParticleCount(5);
             ClientParticles.spawnCubeOutline(ParticleTypes.END_ROD, world, pos, 1, .01f);
         }));
-        CoreErrorParticle.PARTICLE_CONTROLLER.register(ShowParticlesPacket.class, ((world, pos, data) -> {
-            CoreErrorParticle.CUBE.spawn(world, pos);
+        Particles.PARTICLE_CONTROLLER.register(ShowParticlesPacket.class, ((world, pos, data) -> {
+            Particles.CUBE.spawn(world, pos);
         }));
     }
 }
