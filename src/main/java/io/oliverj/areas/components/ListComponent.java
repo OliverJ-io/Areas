@@ -2,12 +2,13 @@ package io.oliverj.areas.components;
 
 import dev.onyxstudios.cca.api.v3.component.Component;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public interface ListComponent<T> extends Component {
-    List<T> getList();
+    LinkedList<T> getList();
 
-    void setList(List<T> value);
+    void setList(LinkedList<T> value);
 
     void add(T value);
 

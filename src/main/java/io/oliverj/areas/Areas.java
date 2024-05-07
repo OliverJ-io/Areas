@@ -1,8 +1,13 @@
 package io.oliverj.areas;
 
+import com.mojang.brigadier.Command;
+import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.context.CommandContext;
+import io.oliverj.areas.commands.TestStatusCommand;
 import io.oliverj.areas.registry.*;
 import io.wispforest.owo.registration.reflect.FieldRegistrationHandler;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,6 +19,8 @@ public class Areas implements ModInitializer {
     public void onInitialize() {
         registries();
         special_registration();
+        networking_registration();
+        command_registration();
     }
 
     public void registries() {
@@ -26,6 +33,10 @@ public class Areas implements ModInitializer {
 
     public void networking_registration() {
         PacketRegister.registerClientDeferredServerSide();
+    }
+
+    public void command_registration() {
+        CommandRegistrationCallback.EVENT.register(AreasCommandRegistry::register);
     }
 
     public void special_registration() {

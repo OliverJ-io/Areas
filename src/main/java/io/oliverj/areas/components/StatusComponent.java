@@ -1,17 +1,20 @@
 package io.oliverj.areas.components;
 
 import io.oliverj.areas.types.Status;
+import lombok.Getter;
+import lombok.Setter;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class StatusComponent implements ListComponent<Status> {
 
-    List<Status> statuses = List.of();
+    private LinkedList<Status> statuses = new LinkedList<>();
     @Override
-    public List getList() {
-        return statuses;
+    public LinkedList<Status> getList() {
+        return this.statuses;
     }
 
     @Override
@@ -40,8 +43,8 @@ public class StatusComponent implements ListComponent<Status> {
     }
 
     @Override
-    public void setList(List value) {
-
+    public void setList(LinkedList value) {
+        this.statuses = value;
     }
 
     @Override

@@ -6,7 +6,7 @@ import io.oliverj.areas.item.InversionCrystalItem;
 import io.oliverj.areas.item.NullCrystalItem;
 import io.oliverj.areas.nbt.NBTUtil;
 import io.oliverj.areas.registry.BlockEntityRegister;
-import io.oliverj.utils.CrystalType;
+import io.oliverj.areas.utils.CrystalType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.inventory.Inventories;

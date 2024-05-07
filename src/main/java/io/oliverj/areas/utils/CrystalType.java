@@ -1,4 +1,4 @@
-package io.oliverj.utils;
+package io.oliverj.areas.utils;
 
 public enum CrystalType {
     NULL,

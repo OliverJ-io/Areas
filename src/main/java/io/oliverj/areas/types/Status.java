@@ -5,6 +5,7 @@ import lombok.Setter;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class Status {
@@ -13,8 +14,8 @@ public class Status {
     @Setter
     private String name;
 
-    public static List<Status> unpackStatus(NbtList nbtL) {
-        List<Status> statuses = List.of();
+    public static LinkedList<Status> unpackStatus(NbtList nbtL) {
+        LinkedList<Status> statuses = new LinkedList<>();
         for (int i=0;i<nbtL.size();i++) {
             NbtCompound nbt = nbtL.getCompound(i);
             Status status = new Status(nbt.getString("name"));
@@ -23,7 +24,7 @@ public class Status {
         return statuses;
     }
 
-    public static NbtList packStatus(List<Status> statuses) {
+    public static NbtList packStatus(LinkedList<Status> statuses) {
         NbtList statusesNBT = new NbtList();
         for (Status status : statuses) {
             NbtCompound nbt = new NbtCompound();
