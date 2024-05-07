@@ -40,7 +40,7 @@ public class AreaCoreBlockEntityRenderer implements BlockEntityRenderer<AreaCore
         itemRenderer.renderItem(
                 stack,
                 ModelTransformationMode.GUI,
-                getLightLevel(entity.getWorld(), entity.getPos()),
+                light,
                 OverlayTexture.DEFAULT_UV,
                 matrices,
                 vertexConsumers,
