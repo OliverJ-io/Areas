@@ -4,7 +4,6 @@ import io.oliverj.areas.types.Status;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class StatusComponent implements ListComponent<Status> {
@@ -23,6 +22,16 @@ public class StatusComponent implements ListComponent<Status> {
     @Override
     public void add(int index, Status value) {
         statuses.add(index, value);
+    }
+
+    @Override
+    public Status get(int index) {
+        return statuses.get(index);
+    }
+
+    @Override
+    public boolean contains(String name) {
+        return statuses.contains(new Status(name));
     }
 
     @Override

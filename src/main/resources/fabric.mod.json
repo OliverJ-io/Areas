@@ -23,9 +23,6 @@
     ],
     "cardinal-components": [
       "io.oliverj.areas.registry.CardinalComponentRegister"
-    ],
-    "fabric-datagen": [
-      "io.oliverj.areas.generation.AreasDataGeneration"
     ]
   },
   "mixins": [
@@ -43,7 +40,7 @@
       "update_checker": false
     },
     "cardinal-components": [
-      "areas:resurrection"
+      "areas:statuses"
     ]
   }
 }

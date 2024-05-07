@@ -13,6 +13,10 @@ public interface ListComponent<T> extends Component {
 
     void add(int index, T value);
 
+    T get(int index);
+
+    boolean contains(String name);
+
     void push(T value);
 
     T pop();

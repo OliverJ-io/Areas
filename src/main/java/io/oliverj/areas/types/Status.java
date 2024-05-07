@@ -33,7 +33,7 @@ public class Status {
         return statusesNBT;
     }
 
-    Status(String name) {
+    public Status(String name) {
         setName(name);
     }
 }
