@@ -1,6 +1,8 @@
 package io.oliverj.areas.block;
 
+import com.ibm.icu.impl.CollectionSet;
 import io.oliverj.areas.block.entity.AreaCoreBlockEntity;
+import io.oliverj.areas.block.entity.AreaFrameBlockEntity;
 import io.oliverj.areas.item.InversionCrystalItem;
 import io.oliverj.areas.item.NullCrystalItem;
 import io.oliverj.areas.registry.BlockEntityRegister;
@@ -26,8 +28,11 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
+import org.spongepowered.include.com.google.common.collect.Collections2;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Random;
 
 public class AreaCoreBlock extends HorizontalConnectingBlock implements BlockEntityProvider {
@@ -54,7 +59,7 @@ public class AreaCoreBlock extends HorizontalConnectingBlock implements BlockEnt
                 player.getStackInHand(hand).setCount(0);
                 ItemStack stack = blockEntity.getStack(0);
                 if (stack.getItem() instanceof NullCrystalItem || stack.getItem() instanceof InversionCrystalItem) {
-                    Collection<Direction> directions = null;
+                    List<Direction> directions = new ArrayList<>();
                     if (world.getBlockState(pos.north()).getBlock() instanceof AreaFrameBlock) {
                         directions.add(Direction.NORTH);
                     }
@@ -75,6 +80,10 @@ public class AreaCoreBlock extends HorizontalConnectingBlock implements BlockEnt
                         be.setActivated(CrystalType.INVERSION);
                     } else {
                         be.setActivated(CrystalType.NONE);
+                    }
+                    AreaFrameBlockEntity beN = (AreaFrameBlockEntity) world.getBlockEntity(pos.offset(direction));
+                    if (beN != null) {
+                        beN.chain(be.getActivated());
                     }
                 }
             }

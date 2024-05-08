@@ -25,6 +25,8 @@ import java.util.List;
 import java.util.UUID;
 
 public class ArtifactOfResurrectionItem extends TrinketItem {
+
+    private int uses = 10;
     public ArtifactOfResurrectionItem(Settings settings) {
         super(settings);
     }
@@ -44,7 +46,8 @@ public class ArtifactOfResurrectionItem extends TrinketItem {
     @Override
     public ItemStack getDefaultStack() {
         ItemStack itemStack = new ItemStack(ArtifactRegister.RESURRECT_ARTIFACT);
-        itemStack.setSubNbt("uses", NbtInt.of(10));
+        itemStack.getOrCreateSubNbt("uses");
+        itemStack.setSubNbt("uses", NbtInt.of(uses));
         return itemStack;
     }
 }
