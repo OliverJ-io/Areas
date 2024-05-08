@@ -1,3 +1,7 @@
 {
-  "death.attack.inversion": "%1$s felt a force reversing"
+  "death.attack.inversion": "%1$s felt a force reversing",
+  "text.config.areas-config.title": "Areas config",
+  "text.config.areas-config.option.magicLevel": "Magic Level",
+  "text.config.areas-config.enum.magicLevel.magic": "Magic",
+  "text.config.areas-config.enum.magicLevel.more_magic": "More Magic"
 }

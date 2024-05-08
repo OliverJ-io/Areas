@@ -4,6 +4,7 @@ import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
 import io.oliverj.areas.commands.TestStatusCommand;
+import io.oliverj.areas.config.AreasConfig;
 import io.oliverj.areas.registry.*;
 import io.wispforest.owo.registration.reflect.FieldRegistrationHandler;
 import net.fabricmc.api.ModInitializer;
@@ -15,6 +16,8 @@ public class Areas implements ModInitializer {
 
     public static final String MOD_ID = "areas";
     public static final Logger LOGGER = LoggerFactory.getLogger("areas");
+
+    public static final AreasConfig CONFIG = AreasConfig.createAndLoad();
     @Override
     public void onInitialize() {
         registries();

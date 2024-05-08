@@ -7,4 +7,5 @@ import io.wispforest.owo.config.annotation.Modmenu;
 @Modmenu(modId = Areas.MOD_ID)
 @Config(name = "areas-config", wrapperName = "AreasConfig")
 public class AreasConfigModel {
+    public MagicLevel magicLevel = MagicLevel.MAGIC;
 }

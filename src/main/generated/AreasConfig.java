@@ -13,7 +13,7 @@ public class AreasConfig extends ConfigWrapper<io.oliverj.areas.config.AreasConf
 
     public final Keys keys = new Keys();
 
-
+    private final Option<io.oliverj.areas.config.MagicLevel> magicLevel = this.optionForKey(this.keys.magicLevel);
 
     private AreasConfig() {
         super(io.oliverj.areas.config.AreasConfigModel.class);
@@ -35,10 +35,17 @@ public class AreasConfig extends ConfigWrapper<io.oliverj.areas.config.AreasConf
         return wrapper;
     }
 
+    public io.oliverj.areas.config.MagicLevel magicLevel() {
+        return magicLevel.value();
+    }
+
+    public void magicLevel(io.oliverj.areas.config.MagicLevel value) {
+        magicLevel.set(value);
+    }
 
 
     public static class Keys {
-
+        public final Option.Key magicLevel = new Option.Key("magicLevel");
     }
 }
 

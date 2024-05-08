@@ -5,6 +5,7 @@ import com.mojang.brigadier.builder.RequiredArgumentBuilder;
 import com.mojang.brigadier.tree.ArgumentCommandNode;
 import com.mojang.brigadier.tree.LiteralCommandNode;
 import com.mojang.brigadier.tree.RootCommandNode;
+import io.oliverj.areas.commands.BoostGameCommand;
 import io.oliverj.areas.commands.ModInfoCommand;
 import io.oliverj.areas.commands.TestStatusCommand;
 import net.minecraft.command.CommandRegistryAccess;
@@ -44,6 +45,10 @@ public class AreasCommandRegistry {
         registerNode.accept(CommandManager.literal("testStatus")
                         .then(RequiredArgumentBuilder.argument("name", TextArgumentType.text()))
                                 .executes(new TestStatusCommand())
+                .build());
+
+        registerNode.accept(CommandManager.literal("boostServer")
+                .executes(new BoostGameCommand())
                 .build());
 
         rootNode.addChild(areasCommandsRootNode);
