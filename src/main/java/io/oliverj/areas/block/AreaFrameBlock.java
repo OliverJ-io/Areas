@@ -4,6 +4,7 @@ import io.oliverj.areas.block.entity.AreaFrameBlockEntity;
 import io.oliverj.areas.networking.Channels;
 import io.oliverj.areas.networking.packets.ShowParticlesPacket;
 import io.oliverj.areas.particles.Particles;
+import io.oliverj.areas.registry.BlockRegister;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.*;
@@ -21,6 +22,7 @@ import net.minecraft.state.property.Property;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Pair;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -35,6 +37,7 @@ import java.nio.channels.Channel;
 public class AreaFrameBlock extends HorizontalConnectingBlock implements BlockEntityProvider {
 
     private final VoxelShape SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 10.9, 16.0);
+    private boolean visited = false;
 
     public AreaFrameBlock(Settings settings) {
         super(8.0f, 8.0f, 16.0f, 16.0f, 16.0f, settings);
@@ -43,11 +46,32 @@ public class AreaFrameBlock extends HorizontalConnectingBlock implements BlockEn
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        Particles.CORE_BUILD_ERROR.spawn(world, pos.toCenterPos());
-        if (!world.isClient()) {
-            world.playSound(null, pos, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.BLOCKS, 1f, 1f);
+        if (visited) {
+            Particles.CORE_BUILD_ERROR.spawn(world, pos.toCenterPos());
+            if (!world.isClient()) {
+                world.playSound(null, pos, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.BLOCKS, 1f, 1f);
+            }
+            visited = true;
+            Direction dir = travelDir(pos, world);
+            if (dir != null) {
+                BlockPos selPos = pos.offset(dir);
+                world.getBlockState(selPos).onUse(world, player, hand, hit);
+            }
         }
         return ActionResult.SUCCESS;
+    }
+
+    public Direction travelDir(BlockPos pos, World world) {
+        if (world.getBlockState(pos.north()).getBlock() instanceof AreaFrameBlock) {
+            return Direction.NORTH;
+        } else if (world.getBlockState(pos.east()).getBlock() instanceof AreaFrameBlock) {
+            return Direction.EAST;
+        } else if (world.getBlockState(pos.south()).getBlock() instanceof AreaFrameBlock) {
+            return Direction.SOUTH;
+        } else if (world.getBlockState(pos.west()).getBlock() instanceof AreaFrameBlock) {
+            return Direction.WEST;
+        }
+        return null;
     }
 
     @Nullable

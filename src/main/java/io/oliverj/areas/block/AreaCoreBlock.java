@@ -1,7 +1,10 @@
 package io.oliverj.areas.block;
 
 import io.oliverj.areas.block.entity.AreaCoreBlockEntity;
+import io.oliverj.areas.item.InversionCrystalItem;
+import io.oliverj.areas.item.NullCrystalItem;
 import io.oliverj.areas.registry.BlockEntityRegister;
+import io.oliverj.areas.utils.CrystalType;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
@@ -10,6 +13,7 @@ import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.Property;
 import net.minecraft.util.ActionResult;
@@ -22,6 +26,9 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Collection;
+import java.util.Random;
 
 public class AreaCoreBlock extends HorizontalConnectingBlock implements BlockEntityProvider {
     private final VoxelShape SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 10.9, 16.0);
@@ -45,11 +52,38 @@ public class AreaCoreBlock extends HorizontalConnectingBlock implements BlockEnt
             if (blockEntity.getStack(0).isEmpty()) {
                 blockEntity.setStack(0, player.getStackInHand(hand).copy());
                 player.getStackInHand(hand).setCount(0);
+                ItemStack stack = blockEntity.getStack(0);
+                if (stack.getItem() instanceof NullCrystalItem || stack.getItem() instanceof InversionCrystalItem) {
+                    Collection<Direction> directions = null;
+                    if (world.getBlockState(pos.north()).getBlock() instanceof AreaFrameBlock) {
+                        directions.add(Direction.NORTH);
+                    }
+                    if (world.getBlockState(pos.east()).getBlock() instanceof AreaFrameBlock) {
+                        directions.add(Direction.EAST);
+                    }
+                    if (world.getBlockState(pos.south()).getBlock() instanceof AreaFrameBlock) {
+                        directions.add(Direction.SOUTH);
+                    }
+                    if (world.getBlockState(pos.south()).getBlock() instanceof AreaFrameBlock) {
+                        directions.add(Direction.WEST);
+                    }
+                    Direction direction = directions.stream().skip((int) (directions.size() * Math.random())).findFirst().get();
+                    AreaCoreBlockEntity be = (AreaCoreBlockEntity) world.getBlockEntity(pos);
+                    if (stack.getItem() instanceof NullCrystalItem) {
+                        be.setActivated(CrystalType.NULL);
+                    } else if (stack.getItem() instanceof InversionCrystalItem) {
+                        be.setActivated(CrystalType.INVERSION);
+                    } else {
+                        be.setActivated(CrystalType.NONE);
+                    }
+                }
             }
         } else {
             if (!blockEntity.getStack(0).isEmpty()) {
                 player.getInventory().offerOrDrop(blockEntity.getStack(0));
                 blockEntity.removeStack(0);
+                AreaCoreBlockEntity be = (AreaCoreBlockEntity) blockEntity;
+                be.setActivated(CrystalType.NONE);
             }
         }
         return ActionResult.SUCCESS;

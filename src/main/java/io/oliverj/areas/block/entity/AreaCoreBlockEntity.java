@@ -7,6 +7,8 @@ import io.oliverj.areas.item.NullCrystalItem;
 import io.oliverj.areas.nbt.NBTUtil;
 import io.oliverj.areas.registry.BlockEntityRegister;
 import io.oliverj.areas.utils.CrystalType;
+import lombok.Getter;
+import lombok.Setter;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.inventory.Inventories;
@@ -24,7 +26,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AreaCoreBlockEntity extends BlockEntity implements ImplementedInventory {
+public class AreaCoreBlockEntity extends BlockEntity implements ImplementedInventory, Activatable<CrystalType> {
 
     private final DefaultedList<ItemStack> items = DefaultedList.ofSize(1, ItemStack.EMPTY);
     private List<BlockPos> corners = List.of(new BlockPos(0, 0, 0));
@@ -87,18 +89,15 @@ public class AreaCoreBlockEntity extends BlockEntity implements ImplementedInven
 
     public static void tick(World world, BlockPos pos, BlockState state, AreaCoreBlockEntity be) {
         world.updateListeners(pos, state, state, 3);
-        if (!be.getStack(0).isEmpty() && be.activated == CrystalType.NONE) {
-            ItemStack stack = be.getStack(0);
-            if (stack.getItem() instanceof NullCrystalItem && be.activated == CrystalType.NONE) {
-                be.activated = CrystalType.NULL;
-                Areas.LOGGER.info("Null Type");
-            } else if (stack.getItem() instanceof InversionCrystalItem && be.activated == CrystalType.NONE) {
-                be.activated = CrystalType.INVERSION;
-                Areas.LOGGER.info("Inversion Type");
-            }
-        } else if (be.getStack(0).isEmpty() && be.activated != CrystalType.NONE) {
-            be.activated = CrystalType.NONE;
-            Areas.LOGGER.info("None Type");
-        }
+    }
+
+    @Override
+    public CrystalType getActivated() {
+        return this.activated;
+    }
+
+    @Override
+    public void setActivated(CrystalType state) {
+        this.activated = state;
     }
 }
