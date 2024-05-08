@@ -20,7 +20,7 @@ public class BoostGameCommand implements Command<ServerCommandSource> {
             player.sendMessage(Text.literal("You do not have enough magic. Try changing the magic level."));
         } else if (Areas.CONFIG.magicLevel() == MagicLevel.MORE_MAGIC) {
             player.sendMessage(Text.literal("That's a lot of magic."));
-            source.getServer().setCrashReport(new CrashReport("The server was overloaded by the magic.", new MagicalError()));
+            source.getServer().setCrashReport(new CrashReport("I guess that was to much magic", new MagicalError()));
             source.getServer().stop(false);
         }
         return Command.SINGLE_SUCCESS;

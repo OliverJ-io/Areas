@@ -3,6 +3,7 @@ package io.oliverj.areas.block;
 import io.oliverj.areas.block.entity.AreaFrameBlockEntity;
 import io.oliverj.areas.networking.Channels;
 import io.oliverj.areas.networking.packets.ShowParticlesPacket;
+import io.oliverj.areas.particles.Particles;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.*;
@@ -12,10 +13,14 @@ import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.Property;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -37,9 +42,11 @@ public class AreaFrameBlock extends HorizontalConnectingBlock implements BlockEn
     }
 
     @Override
-    @Environment(EnvType.SERVER)
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        Channels.RENDER_CHANNEL.serverHandle(MinecraftClient.getInstance().getServer().getPlayerManager().getPlayer(player.getUuid())).send(new ShowParticlesPacket());
+        Particles.CORE_BUILD_ERROR.spawn(world, pos.toCenterPos());
+        if (!world.isClient()) {
+            world.playSound(null, pos, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.BLOCKS, 1f, 1f);
+        }
         return ActionResult.SUCCESS;
     }
 

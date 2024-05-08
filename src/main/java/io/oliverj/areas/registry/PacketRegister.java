@@ -14,7 +14,7 @@ public class PacketRegister {
     @Environment(EnvType.CLIENT)
     public static void registerClientDeferredClientSide() {
         Channels.TEST_CHANNEL.registerClientbound(TestPacket.class, ((message, access) -> {
-            access.player().sendMessage(Text.literal("Received Test: " + message));
+            access.player().sendMessage(Text.literal("Received Test: " + message.message()));
         }));
     }
 }
