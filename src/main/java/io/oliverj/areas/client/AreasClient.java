@@ -41,8 +41,7 @@ public class AreasClient implements ClientModInitializer {
             ClientParticles.spawnCubeOutline(ParticleTypes.END_ROD, world, pos, 1, .01f);
         }));
         Particles.PARTICLE_CONTROLLER.register(ShowParticlesPacket.class, ((world, pos, data) -> {
-            Particles.CUBE.spawn(world, pos);
-            Particles.BREAK_BLOCK_PARTICLES.spawn(world, pos);
+            Particles.CORE_BUILD_ERROR.spawn(world, pos);
         }));
     }
 }

@@ -22,9 +22,9 @@ public class TestStatusCommand implements Command<ServerCommandSource> {
     }
 
     public static int exec(CommandContext<ServerCommandSource> context, Text rawNameText) throws CommandSyntaxException {
-        ServerPlayerEntity targetPlayer = context.getSource().getPlayerOrThrow().getServer().getPlayerManager().getPlayer(context.getSource().getPlayerOrThrow().getUuid());
+        ServerPlayerEntity targetPlayer = context.getSource().getPlayerOrThrow();
         if (rawNameText == null) {
-            targetPlayer.getComponent(CardinalComponentRegister.STATUSES).setList(new LinkedList());
+            targetPlayer.getComponent(CardinalComponentRegister.STATUSES).setList(new LinkedList<>());
         } else {
             targetPlayer.getComponent(CardinalComponentRegister.STATUSES).add(new Status(rawNameText.toString()));
         }
