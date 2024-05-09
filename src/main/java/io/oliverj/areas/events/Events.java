@@ -17,19 +17,19 @@ import java.util.List;
 @SuppressWarnings("unused")
 public class Events {
     public static void registerEvents() {
-        ServerLivingEntityEvents.ALLOW_DEATH.register(((entity, damageSource, damageAmount) -> {
-            if (entity instanceof PlayerEntity player) {
-                if (player.getComponent(TrinketsApi.TRINKET_COMPONENT).isEquipped(ArtifactRegister.RESURRECT_ARTIFACT)) {
-                    Pair<SlotReference, ItemStack> equippedArtifact = player.getComponent(TrinketsApi.TRINKET_COMPONENT).getEquipped(ArtifactRegister.RESURRECT_ARTIFACT).get(0);
-                    ItemStack artifact = equippedArtifact.getRight();
-                    int uses = artifact.get(new NbtKey<>("uses", NbtKey.Type.INT));
-                    artifact.setSubNbt("uses", NbtInt.of(uses - 1));
-                    player.heal(player.getMaxHealth());
-                    return false;
-                }
-            }
-            entity.heal(entity.getMaxHealth());
-            return false;
-        }));
+//        ServerLivingEntityEvents.ALLOW_DEATH.register(((entity, damageSource, damageAmount) -> {
+//            if (entity instanceof PlayerEntity player) {
+//                if (player.getComponent(TrinketsApi.TRINKET_COMPONENT).isEquipped(ArtifactRegister.RESURRECT_ARTIFACT)) {
+//                    Pair<SlotReference, ItemStack> equippedArtifact = player.getComponent(TrinketsApi.TRINKET_COMPONENT).getEquipped(ArtifactRegister.RESURRECT_ARTIFACT).get(0);
+//                    ItemStack artifact = equippedArtifact.getRight();
+//                    int uses = artifact.get(new NbtKey<>("uses", NbtKey.Type.INT));
+//                    artifact.setSubNbt("uses", NbtInt.of(uses - 1));
+//                    player.heal(player.getMaxHealth());
+//                    return false;
+//                }
+//            }
+//            entity.heal(entity.getMaxHealth());
+//            return false;
+//        }));
     }
 }
